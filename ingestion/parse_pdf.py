@@ -228,6 +228,37 @@ def _split_at_sentences(text: str, start: int, target_chars: int) -> int:
     return hard_end
 
 
+def _is_heading_like_first_line(line: str) -> bool:
+    """
+    Check whether a chunk's first line looks like its own section heading
+    (e.g. '(B) Plant tissues', '(B) Compound (Complex) Tissues:').
+    Used to self-correct chunks whose body text begins with a real heading
+    that was overridden or missed by the preceding text stream.
+    """
+    line = line.strip()
+    if not line or line.endswith(('.', '?', '!', ';')):
+        return False
+    if any(p.match(line) for p in NOISE_LINE_PATTERNS) or "BIOLOGY" in line:
+        return False
+    words = line.split()
+    if not (1 <= len(words) <= 6):
+        return False
+    # If ends in colon
+    if line.endswith(':'):
+        return True
+    # Lettered or numbered marker: e.g. "(B) Plant tissues", "(A) Simple...", "1. ..."
+    if line.startswith('(') and len(words) >= 2:
+        return True
+    if len(words) >= 2 and words[0][0].isdigit():
+        return True
+    # Title-cased phrase (1-5 words, every major word capitalized)
+    minor = {'and', 'or', 'of', 'in', 'the', 'for', 'with', 'on', 'at', 'to', 'a', 'an', '&'}
+    if 1 <= len(words) <= 5 and all(w[0].isupper() or w.lower() in minor for w in words):
+        if all(any(c.isalpha() for c in w) for w in words):
+            return True
+    return False
+
+
 def _make_chunks_from_section(
     heading: str,
     body: str,
@@ -256,11 +287,17 @@ def _make_chunks_from_section(
             seq_counter[0] += 1
             absolute_offset = body_global_offset + pos
             page_hint = _page_hint_for_offset(absolute_offset, page_breaks)
+
+            # Heading self-correction: if chunk body starts with a heading-like phrase
+            # of its own (e.g. "(B) Plant tissues"), use that phrase as section_heading.
+            first_line = chunk_text.split('\n')[0].strip()
+            chunk_heading = first_line if _is_heading_like_first_line(first_line) else heading
+
             chunks.append(Chunk(
                 chunk_id=f"{chapter_code}_c{seq:03d}",
                 book=book,
                 chapter=chapter,
-                section_heading=heading,
+                section_heading=chunk_heading,
                 page_hint=page_hint,
                 text=chunk_text,
             ))

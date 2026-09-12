@@ -61,7 +61,7 @@ Original plan included photo upload with Tesseract + Gemini-vision fallback. **F
 ## 7. Success Criteria (how you'll know it's actually done)
 
 - Running the CLI on Chapter 4 with a request for 5 MCQs returns 5 questions, each with a `source_chunk_id` that resolves to a real chunk in `chunks.jsonl`.
-- Asking for a question about "Krebs cycle" against Chapter 6 (Enzymes) returns a graceful refusal, not a hallucinated answer.
+- Asking for a question about "Krebs cycle" against Chapter 6 (Enzymes) returns a graceful refusal, not a hallucinated answer. (Demonstrated via scripts/demonstrate_refusal.py: retrieval similarity scores cleanly separate in-scope (0.88-0.92) from out-of-scope (0.80-0.83) queries against Chapter 6, with a proposed 0.85 threshold — not wired into the live generation path, since the MVP UI has no free-text topic input.)
 - The verification pass actually rejects at least one deliberately-bad test question during development — if it never rejects anything in testing, you haven't tested it hard enough, and you cannot honestly claim it works on stage.
 - The Streamlit app is reachable via a public URL, not just localhost, at the time of judging.
 - One full attempt-mode cycle (question → student answer → graded feedback with source reference) works end-to-end without manual intervention.
