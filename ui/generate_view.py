@@ -96,11 +96,20 @@ def render_generate_screen():
             with sub_col3:
                 lang = st.selectbox("Language", options=["English (en)", "Urdu (ur)"], index=0)
 
-        gen_button = st.button(
-            "⚡ Generate Practice Questions",
-            type="primary",
-            use_container_width=True,
-        )
+        col_btn1, col_btn2 = st.columns([1.6, 1.2])
+        with col_btn1:
+            gen_button = st.button(
+                "⚡ Generate Practice Questions (Live)",
+                type="primary",
+                use_container_width=True,
+            )
+        with col_btn2:
+            sample_button = st.button(
+                "📋 Load Verified Set (Instant)",
+                type="secondary",
+                use_container_width=True,
+                help="Instantly load pre-verified Chapter 4 questions without live API call.",
+            )
         st.markdown("</div>", unsafe_allow_html=True)
 
     # Generation trigger
@@ -121,6 +130,20 @@ def render_generate_screen():
             st.session_state["questions"] = questions
             st.session_state["selected_chapter"] = selected_chapter
             st.toast(f"Generated {len(questions)} verified questions!", icon="✅")
+
+    if sample_button:
+        from core.mock_core import generate_questions as load_fixtures_questions
+        req = GenerateRequest(
+            book="Biology 9 (STBB, English Medium)",
+            chapter="Chapter 4 - Cells and Tissues",
+            qtype="mcq",
+            count=5,
+            language="en",
+        )
+        sample_questions = load_fixtures_questions(req)
+        st.session_state["questions"] = sample_questions
+        st.session_state["selected_chapter"] = "Chapter 4 - Cells and Tissues"
+        st.toast("Loaded 5 verified Chapter 4 demo questions!", icon="📋")
 
     # Render questions if available
     questions: list[GeneratedQuestion] = st.session_state.get("questions", [])
@@ -253,8 +276,9 @@ def render_question_card(idx: int, q: GeneratedQuestion, chunk_lookup: dict[str,
                 unsafe_allow_html=True,
             )
         with tab_roman:
+            roman_content = q.explanation_ur_roman if (q.explanation_ur_roman and q.explanation_ur_roman.strip()) else (q.explanation_en or 'No explanation provided.')
             st.markdown(
-                f"<div class='explanation-box'>{q.explanation_ur_roman or 'Roman Urdu explanation available in attempt view.'}</div>",
+                f"<div class='explanation-box'>{roman_content}</div>",
                 unsafe_allow_html=True,
             )
         st.markdown("</div>", unsafe_allow_html=True)

@@ -57,6 +57,43 @@
       "explanation_en": "Mitochondria carry out cellular respiration, converting nutrients into ATP energy. Because of this energy production, mitochondria are known as the 'powerhouse of the cell'.",
       "explanation_ur": "مائٹوکانڈریا خلوی تنفس کا مرکز ہے جہاں توانائی ATP کی شکل میں پیدا ہوتی ہے۔ اسی لیے مائٹوکانڈریا کو خلیے کا 'پاور ہاؤس' کہا جاتا ہے۔",
       "explanation_ur_roman": "Mitochondria cellular respiration ka markaz hai jahan tawanai ATP ki shakal mein banti hai. Isi liye mitochondria ko cell ka 'Powerhouse' kaha jata hai."
+    },
+    {
+      "q_id": "d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1",
+      "qtype": "mcq",
+      "question": "Which cellular structure is composed of RNA and protein and serves as the primary site of protein synthesis?",
+      "options": [
+        "Ribosome",
+        "Lysosome",
+        "Vacuole",
+        "Centriole"
+      ],
+      "correct_option_index": 0,
+      "model_answer": "Ribosomes are composed of RNA and protein and are the sites where protein synthesis occurs.",
+      "marks": 1,
+      "language": "en",
+      "source_chunk_id": "bio9_ch04_c029",
+      "verified": true,
+      "verification_note": "Directly supported by textbook section on Ribosomes (p. 75).",
+      "explanation_en": "Ribosomes are composed of RNA and protein. They occur in the cytoplasm or attached to rough ER, where they assemble amino acids into proteins.",
+      "explanation_ur": "رائبوسوم آر این اے اور پروٹین سے مل کر بنتے ہیں اور پروٹین بنانے کے اہم مراکز ہیں۔",
+      "explanation_ur_roman": "Ribosomes RNA aur protein se bante hain aur protein synthesis ke markaz hain."
+    },
+    {
+      "q_id": "e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2",
+      "qtype": "short",
+      "question": "Define active transport and state the molecule that provides energy for this process.",
+      "options": [],
+      "correct_option_index": -1,
+      "model_answer": "Active transport is the movement of substances against a concentration gradient, from a region of low concentration to high concentration. It requires energy in the form of adenosine triphosphate (ATP).",
+      "marks": 3,
+      "language": "en",
+      "source_chunk_id": "bio9_ch04_c028",
+      "verified": true,
+      "verification_note": "Directly supported by textbook section on Active Transport (p. 74).",
+      "explanation_en": "Active transport moves molecules against their natural gradient and therefore requires cellular energy stored in ATP molecules.",
+      "explanation_ur": "ایکٹیو ٹرانسپورٹ کم ارتکاز سے زیادہ ارتکاز کی طرف مادوں کی حرکت ہے جس کے لیے اے ٹی پی کی توانائی درکار ہوتی ہے۔",
+      "explanation_ur_roman": "Active transport low concentration se high concentration ki taraf movement hai jiske liye ATP energy darkar hoti hai."
     }
   ],
   "grade_results": {
@@ -77,6 +114,18 @@
       "feedback": "Your answer correctly identified mitochondria as the organelle responsible for energy production (ATP). However, you did not mention the double membrane structure with cristae (inner folds) or that ATP is produced specifically during aerobic respiration as described in the textbook passage. Partial credit awarded.",
       "missed_point": "The textbook passage states: 'The inner membrane contains many folds called cristae which contain specialized membrane proteins that enable the mitochondria to synthesize ATP. Mitochondria is the site of aerobic respiration.'",
       "source_chunk_id": "bio9_ch04_c032"
+    },
+    "d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1": {
+      "score": 10.0,
+      "feedback": "Correct. Ribosomes are composed of RNA and proteins and function as the primary sites of protein synthesis.",
+      "missed_point": "",
+      "source_chunk_id": "bio9_ch04_c029"
+    },
+    "e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2": {
+      "score": 9.0,
+      "feedback": "Well stated definition of active transport against the concentration gradient with ATP identified as the energy currency.",
+      "missed_point": "",
+      "source_chunk_id": "bio9_ch04_c028"
     }
   },
   "grade_result": {

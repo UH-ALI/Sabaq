@@ -20,7 +20,12 @@ import streamlit as st
 
 import config
 from contracts import GradeRequest, GradeResult, GeneratedQuestion
-from core.mock_core import grade_answer  # Mock grading active until Phase 10
+
+if config.USE_MOCK_CORE:
+    from core.mock_core import grade_answer
+else:
+    from core.grader import grade_answer
+
 
 
 @st.cache_data
@@ -263,13 +268,13 @@ def render_grade_report(
         score_label = "Needs Review • Concept Incomplete"
 
     with st.container():
-        # Attempt Mode's grading uses mock until Phase 10
+        # Attempt Mode's grading demo notice (shown only when USE_MOCK_CORE is active)
         mock_notice_html = (
             '<div style="background: rgba(245, 158, 11, 0.15); border: 1.5px solid rgba(251, 191, 36, 0.5); border-radius: 8px; padding: 10px 16px; margin-bottom: 18px; display: flex; align-items: center; gap: 10px; font-size: 0.88rem; color: #fde68a; font-weight: 500; line-height: 1.5;">'
             '<span style="font-size: 1.15rem;">⚠️</span>'
             '<span><b>Demo mode:</b> this feedback is a fixed sample response and doesn\'t reflect the answer you actually submitted. Real answer-specific grading activates once the live engine is connected (Phase 10).</span>'
             '</div>'
-        )
+        ) if config.USE_MOCK_CORE else ""
 
         st.markdown(
             f"""<div class="result-card">
@@ -362,8 +367,9 @@ def render_grade_report(
                 unsafe_allow_html=True,
             )
         with tab_roman:
+            roman_content = q.explanation_ur_roman if (q.explanation_ur_roman and q.explanation_ur_roman.strip()) else (q.explanation_en or 'No explanation available.')
             st.markdown(
-                f"<div class='explanation-box'>{q.explanation_ur_roman or 'Roman Urdu explanation available.'}</div>",
+                f"<div class='explanation-box'>{roman_content}</div>",
                 unsafe_allow_html=True,
             )
         st.markdown("</div>", unsafe_allow_html=True)

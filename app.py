@@ -14,6 +14,14 @@ import os
 os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 
 import streamlit as st
+
+# Bridge Streamlit Cloud secrets to environment variables if deployed
+try:
+    if hasattr(st, "secrets") and "GEMINI_API_KEY" in st.secrets:
+        os.environ["GEMINI_API_KEY"] = st.secrets["GEMINI_API_KEY"]
+except Exception:
+    pass
+
 import config
 from ui.generate_view import render_generate_screen
 from ui.attempt_view import render_attempt_screen
