@@ -25,7 +25,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from contracts import Chunk, GenerateRequest, GeneratedQuestion
 from core.retriever import retrieve
-from core.verify import verify
+from core.verify import verify, verify_batch
 import config
 
 load_dotenv()
@@ -134,26 +134,26 @@ def generate_questions(req: GenerateRequest) -> list[GeneratedQuestion]:
     client = _get_genai_client()
     prompt = _build_prompt(req, chapter_chunks)
 
-    model_name = config.LLM_MODEL
-    try:
-        response = client.models.generate_content(
-            model=model_name,
+    def _gen_call(model: str):
+        return client.models.generate_content(
+            model=model,
             contents=prompt,
             config=types.GenerateContentConfig(
                 response_mime_type="application/json",
                 temperature=0.2,  # Low temperature for strict factual grounding
             ),
         )
+
+    try:
+        response = _gen_call(config.LLM_MODEL)
     except Exception as exc:
-        if "no longer available" in str(exc) or "404" in str(exc):
-            response = client.models.generate_content(
-                model="gemini-2.5-flash",
-                contents=prompt,
-                config=types.GenerateContentConfig(
-                    response_mime_type="application/json",
-                    temperature=0.2,
-                ),
-            )
+        exc_str = str(exc)
+        if "429" in exc_str or "quota" in exc_str.lower() or "rate" in exc_str.lower():
+            # Quota / rate-limit: one retry on the lite fallback model
+            response = _gen_call(config.FALLBACK_LLM_MODEL)
+        elif "no longer available" in exc_str or "404" in exc_str:
+            # Model unavailable: fall back to stable flash
+            response = _gen_call("gemini-2.5-flash")
         else:
             raise
 
@@ -194,16 +194,12 @@ def generate_questions(req: GenerateRequest) -> list[GeneratedQuestion]:
         )
         questions.append(q)
 
-    # Phase 5 Verification Layer: verify every question against its source chunk
+    # Phase 5 Verification Layer: batch-verify all questions in one LLM call
+    # (reduces N individual verify() calls to 1, saving N-1 API round-trips)
     chunk_by_id = {c.chunk_id: c for c in chapter_chunks}
-    for q in questions:
-        src = chunk_by_id.get(q.source_chunk_id)
-        if src is not None:
-            is_verified, note = verify(q, src)
-            q.verified = is_verified
-            q.verification_note = note
-        else:
-            q.verified = False
-            q.verification_note = f"Source chunk {q.source_chunk_id} could not be resolved."
+    batch_results = verify_batch(questions, chunk_by_id)
+    for q, (is_verified, note) in zip(questions, batch_results):
+        q.verified = is_verified
+        q.verification_note = note
 
     return questions
