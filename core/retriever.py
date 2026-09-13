@@ -42,7 +42,10 @@ _CHUNKS_CACHE: dict[str, list[Chunk]] = {}
 def _get_model() -> SentenceTransformer:
     global _MODEL
     if _MODEL is None:
-        _MODEL = SentenceTransformer(config.EMBEDDING_MODEL, local_files_only=True)
+        try:
+            _MODEL = SentenceTransformer(config.EMBEDDING_MODEL, local_files_only=True)
+        except Exception:
+            _MODEL = SentenceTransformer(config.EMBEDDING_MODEL)
     return _MODEL
 
 
