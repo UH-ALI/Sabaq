@@ -20,11 +20,7 @@ import streamlit as st
 
 import config
 from contracts import GradeRequest, GradeResult, GeneratedQuestion
-
-if config.USE_MOCK_CORE:
-    from core.mock_core import grade_answer
-else:
-    from core.grader import grade_answer
+from core.mock_core import grade_answer  # Mock grading active until Phase 10
 
 
 @st.cache_data
@@ -267,14 +263,13 @@ def render_grade_report(
         score_label = "Needs Review • Concept Incomplete"
 
     with st.container():
-        mock_notice_html = ""
-        if config.USE_MOCK_CORE:
-            mock_notice_html = (
-                '<div style="background: rgba(245, 158, 11, 0.15); border: 1.5px solid rgba(251, 191, 36, 0.5); border-radius: 8px; padding: 10px 16px; margin-bottom: 18px; display: flex; align-items: center; gap: 10px; font-size: 0.88rem; color: #fde68a; font-weight: 500; line-height: 1.5;">'
-                '<span style="font-size: 1.15rem;">⚠️</span>'
-                '<span><b>Demo mode:</b> this feedback is a fixed sample response and doesn\'t reflect the answer you actually submitted. Real answer-specific grading activates once the live engine is connected (Phase 9).</span>'
-                '</div>'
-            )
+        # Attempt Mode's grading uses mock until Phase 10
+        mock_notice_html = (
+            '<div style="background: rgba(245, 158, 11, 0.15); border: 1.5px solid rgba(251, 191, 36, 0.5); border-radius: 8px; padding: 10px 16px; margin-bottom: 18px; display: flex; align-items: center; gap: 10px; font-size: 0.88rem; color: #fde68a; font-weight: 500; line-height: 1.5;">'
+            '<span style="font-size: 1.15rem;">⚠️</span>'
+            '<span><b>Demo mode:</b> this feedback is a fixed sample response and doesn\'t reflect the answer you actually submitted. Real answer-specific grading activates once the live engine is connected (Phase 10).</span>'
+            '</div>'
+        )
 
         st.markdown(
             f"""<div class="result-card">

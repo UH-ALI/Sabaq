@@ -10,6 +10,9 @@ Coordinates the 3-screen matric exam preparation flow:
 
 from __future__ import annotations
 
+import os
+os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
+
 import streamlit as st
 import config
 from ui.generate_view import render_generate_screen

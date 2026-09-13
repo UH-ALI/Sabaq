@@ -9,13 +9,16 @@ the top-k matching Chunks.
 
 from __future__ import annotations
 
+import os
+os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
+
 import json
 import sys
 from pathlib import Path
 
-import faiss
-import numpy as np
+# SentenceTransformer (PyTorch) must load before faiss to prevent OpenMP DLL conflict on Windows
 from sentence_transformers import SentenceTransformer
+import numpy as np
 
 # Add project root to sys.path so contracts and config import cleanly
 sys.path.insert(0, str(Path(__file__).parent.parent))
@@ -32,7 +35,7 @@ QUERY_PREFIX = "query: "
 
 # Module-level caches to avoid reloading model / index / chunks on every call
 _MODEL: SentenceTransformer | None = None
-_INDEX_CACHE: dict[str, faiss.Index] = {}
+_INDEX_CACHE: dict[str, any] = {}
 _CHUNKS_CACHE: dict[str, list[Chunk]] = {}
 
 
@@ -43,13 +46,17 @@ def _get_model() -> SentenceTransformer:
     return _MODEL
 
 
-def _get_index(index_path: str) -> faiss.Index:
+def _get_index(index_path: str):
+    # Ensure PyTorch model initializes before faiss to avoid OpenMP DLL clash
+    _get_model()
+    import faiss
     if index_path not in _INDEX_CACHE:
         path = Path(index_path)
         if not path.exists():
             raise FileNotFoundError(f"FAISS index not found at: {index_path}")
         _INDEX_CACHE[index_path] = faiss.read_index(str(path))
     return _INDEX_CACHE[index_path]
+
 
 
 def _get_chunks(chunks_path: str) -> list[Chunk]:
