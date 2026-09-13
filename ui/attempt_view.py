@@ -267,22 +267,30 @@ def render_grade_report(
         score_label = "Needs Review • Concept Incomplete"
 
     with st.container():
+        mock_notice_html = ""
+        if config.USE_MOCK_CORE:
+            mock_notice_html = (
+                '<div style="background: rgba(245, 158, 11, 0.15); border: 1.5px solid rgba(251, 191, 36, 0.5); border-radius: 8px; padding: 10px 16px; margin-bottom: 18px; display: flex; align-items: center; gap: 10px; font-size: 0.88rem; color: #fde68a; font-weight: 500; line-height: 1.5;">'
+                '<span style="font-size: 1.15rem;">⚠️</span>'
+                '<span><b>Demo mode:</b> this feedback is a fixed sample response and doesn\'t reflect the answer you actually submitted. Real answer-specific grading activates once the live engine is connected (Phase 9).</span>'
+                '</div>'
+            )
+
         st.markdown(
-            f"""
-            <div class="result-card">
-                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #334155; padding-bottom: 16px; margin-bottom: 20px;">
-                    <div>
-                        <span style="font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #94a3b8;">Evaluation Result</span>
-                        <h2 style="margin: 4px 0 0 0; font-size: 1.6rem; font-weight: 700; color: #ffffff;">Board Exam Graded Feedback</h2>
-                    </div>
-                    <div style="text-align: right;">
-                        <div class="score-badge {score_class}">
-                            {score:.1f} <span style="font-size: 1rem; font-weight: 500; opacity: 0.8;">/ 10.0</span>
-                        </div>
-                        <div style="font-size: 0.82rem; font-weight: 600; color: #94a3b8; margin-top: 4px;">{score_label}</div>
-                    </div>
-                </div>
-            """,
+            f"""<div class="result-card">
+{mock_notice_html}
+<div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #334155; padding-bottom: 16px; margin-bottom: 20px;">
+<div>
+<span style="font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #94a3b8;">Evaluation Result</span>
+<h2 style="margin: 4px 0 0 0; font-size: 1.6rem; font-weight: 700; color: #ffffff;">Board Exam Graded Feedback</h2>
+</div>
+<div style="text-align: right;">
+<div class="score-badge {score_class}">
+{score:.1f} <span style="font-size: 1rem; font-weight: 500; opacity: 0.8;">/ 10.0</span>
+</div>
+<div style="font-size: 0.82rem; font-weight: 600; color: #94a3b8; margin-top: 4px;">{score_label}</div>
+</div>
+</div>""",
             unsafe_allow_html=True,
         )
 
