@@ -52,12 +52,16 @@ def generate_questions(req: GenerateRequest) -> list[GeneratedQuestion]:
 
 
 def grade_answer(req: GradeRequest) -> GradeResult:
-    """Returns one hardcoded GradeResult. Same signature as the real grader."""
+    """Returns a topic-matched GradeResult from fixtures/demo_fixtures.json.
+    Same signature as the real grader."""
     data = _load_fixtures()
-    gr = data["grade_result"]
+    results = data.get("grade_results", {})
+    qid = getattr(req.question, "q_id", "")
+    gr = results.get(qid, data.get("grade_result"))
     return GradeResult(
         score=gr["score"],
         feedback=gr["feedback"],
         missed_point=gr["missed_point"],
-        source_chunk_id=gr["source_chunk_id"],
+        source_chunk_id=gr.get("source_chunk_id", req.question.source_chunk_id),
     )
+

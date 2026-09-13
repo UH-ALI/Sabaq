@@ -14,12 +14,12 @@
       "model_answer": "The cell membrane controls the movement of substances in and out of the cell. It is selectively permeable, allowing certain molecules to pass while restricting others.",
       "marks": 1,
       "language": "en",
-      "source_chunk_id": "bio9_ch04_c003",
+      "source_chunk_id": "bio9_ch04_c016",
       "verified": true,
-      "verification_note": "Model answer is directly supported by the source chunk's description of selective permeability of the cell membrane.",
-      "explanation_en": "The cell membrane is a selectively permeable barrier made of a phospholipid bilayer with embedded proteins. It regulates what enters and exits the cell — allowing oxygen, water, and nutrients in while keeping harmful substances out.",
-      "explanation_ur": "خلوی جھلی ایک منتخب نفوذ پذیر تہہ ہے جو فاسفولیپڈ کی دوہری پرت سے بنی ہے۔ یہ خلیے میں داخل ہونے اور نکلنے والے مادوں کو کنٹرول کرتی ہے۔",
-      "explanation_ur_roman": "Khalvi jhilli ek muntakhib nafooz pazeer teh hai jo phospholipid ki dohari parat se bani hai. Yeh khalie mein dakhil hone aur nikalne walay madon ko control karti hai."
+      "verification_note": "Model answer is directly supported by the source chunk's description of selective permeability and boundary function of the cell membrane.",
+      "explanation_en": "The cell membrane is the outer living boundary of all cells. It physically separates the intracellular space from the extracellular environment, protecting the cytoplasm and regulating what enters and exits the cell.",
+      "explanation_ur": "خلوی جھلی تمام خلیوں کی بیرونی زندہ حد ہے۔ یہ اندرونی حصے کو بیرونی ماحول سے الگ کرتی ہے، سائٹوپلازم کی حفاظت کرتی ہے اور خلیے کے اندر اور باہر مادوں کی نقل و حرکت کو کنٹرول کرتی ہے۔",
+      "explanation_ur_roman": "Cell membrane tamam khaliyon ki beruni zinda had hai jo intracellular space ko extracellular mahol se alag karti hai aur madon ki aamad o raft ko control karti hai."
     },
     {
       "q_id": "b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5",
@@ -30,12 +30,12 @@
       "model_answer": "Cell wall: (1) Present only in plant cells, fungi, and bacteria. (2) Made of cellulose in plants; it is rigid and provides structural support. Cell membrane: (1) Present in all living cells (plant and animal). (2) Made of a phospholipid bilayer; it is flexible and selectively permeable.",
       "marks": 4,
       "language": "en",
-      "source_chunk_id": "bio9_ch04_c005",
+      "source_chunk_id": "bio9_ch04_c017",
       "verified": true,
       "verification_note": "Both points of difference are explicitly stated in the source chunk, which contrasts cell wall composition and distribution with those of the cell membrane.",
-      "explanation_en": "The cell wall is a stiff outer layer found only outside the cell membrane in plant cells. It is made of cellulose and gives shape and protection. The cell membrane, by contrast, is present in every living cell and is a flexible phospholipid bilayer that controls what passes in and out.",
-      "explanation_ur": "خلوی دیوار صرف پودوں کے خلیوں میں پائی جاتی ہے اور سیلولوز سے بنی ہوتی ہے جو سختی اور تحفظ فراہم کرتی ہے۔ خلوی جھلی تمام خلیوں میں موجود ہوتی ہے اور مادوں کی آمد و رفت کو کنٹرول کرتی ہے۔",
-      "explanation_ur_roman": "Khalvi dewar sirf poudon ke khaliyon mein payi jaati hai aur cellulose se bani hoti hai. Khalvi jhilli tamam khaliyon mein mojood hoti hai aur madon ki aamad o raft ko control karti hai."
+      "explanation_en": "The cell wall is a tough, rigid non-living layer found outside the cell membrane in plants and bacteria, composed primarily of cellulose. The cell membrane is present in all living cells as a flexible boundary.",
+      "explanation_ur": "خلوی دیوار ایک سخت، غیر جاندار حفاظتی تہہ ہے جو پودوں کے خلیوں میں سیلولوز سے بنتی ہے۔ خلوی جھلی تمام جاندار خلیوں میں لچکدار حد کے طور پر موجود ہوتی ہے۔",
+      "explanation_ur_roman": "Cell wall ek sakht, ghair jandar teh hai jo poudon mein cellulose se banti hai. Cell membrane tamam zinda khaliyon mein flexible boundary ke tor par mojood hoti hai."
     },
     {
       "q_id": "c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6",
@@ -51,18 +51,38 @@
       "model_answer": "Mitochondria are responsible for producing ATP through the process of cellular respiration. They are known as the powerhouse of the cell.",
       "marks": 1,
       "language": "en",
-      "source_chunk_id": "bio9_ch04_c009",
-      "verified": false,
-      "verification_note": "The source chunk mentions mitochondria and cellular respiration in passing but does not explicitly state that mitochondria produce ATP or use the phrase 'powerhouse of the cell'. The model answer goes beyond what the retrieved passage directly supports.",
-      "explanation_en": "Mitochondria carry out cellular respiration, converting glucose and oxygen into ATP (energy), carbon dioxide, and water. They have a double membrane structure with inner folds called cristae that increase the surface area for this process.",
-      "explanation_ur": "مائٹوکانڈریا خلوی تنفس انجام دیتا ہے اور گلوکوز اور آکسیجن کو توانائی (ATP) میں تبدیل کرتا ہے۔ اس کی اندرونی جھلی میں کرسٹی نامی تہیں ہوتی ہیں۔",
-      "explanation_ur_roman": "Mitochondria khalvi tanaffus anjam deta hai aur glucose aur oxygen ko tawanai (ATP) mein tabdeel karta hai. Iski andaruni jhilli mein cristae naami tehain hoti hain."
+      "source_chunk_id": "bio9_ch04_c032",
+      "verified": true,
+      "verification_note": "Model answer is directly supported by the source chunk (Mitochondria section, p. 77), which states that during aerobic respiration energy is produced in the form of ATP, making mitochondria the 'Power house' of the cell.",
+      "explanation_en": "Mitochondria carry out cellular respiration, converting nutrients into ATP energy. Because of this energy production, mitochondria are known as the 'powerhouse of the cell'.",
+      "explanation_ur": "مائٹوکانڈریا خلوی تنفس کا مرکز ہے جہاں توانائی ATP کی شکل میں پیدا ہوتی ہے۔ اسی لیے مائٹوکانڈریا کو خلیے کا 'پاور ہاؤس' کہا جاتا ہے۔",
+      "explanation_ur_roman": "Mitochondria cellular respiration ka markaz hai jahan tawanai ATP ki shakal mein banti hai. Isi liye mitochondria ko cell ka 'Powerhouse' kaha jata hai."
     }
   ],
+  "grade_results": {
+    "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4": {
+      "score": 5.5,
+      "feedback": "Your answer correctly identified that the cell membrane is selectively permeable and mentioned it controls what enters the cell. However, you did not mention the phospholipid bilayer structure or the role of membrane proteins, which are key components described in the textbook passage. Partial credit awarded.",
+      "missed_point": "The textbook passage states: 'The cell membrane is composed of a phospholipid bilayer with embedded protein molecules that assist in the transport of specific substances across the membrane.'",
+      "source_chunk_id": "bio9_ch04_c016"
+    },
+    "b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5": {
+      "score": 6.0,
+      "feedback": "Good comparison between plant cell wall and cell membrane. You correctly noted that the cell wall is rigid and contains cellulose, while the cell membrane is flexible. However, you omitted that the cell wall is non-living and permeable, unlike the selectively permeable living membrane.",
+      "missed_point": "The textbook passage states: 'A cell wall is a tough, rigid non-living and permeable protective layer... positioned next to the cell membrane.'",
+      "source_chunk_id": "bio9_ch04_c017"
+    },
+    "c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6": {
+      "score": 6.0,
+      "feedback": "Your answer correctly identified mitochondria as the organelle responsible for energy production (ATP). However, you did not mention the double membrane structure with cristae (inner folds) or that ATP is produced specifically during aerobic respiration as described in the textbook passage. Partial credit awarded.",
+      "missed_point": "The textbook passage states: 'The inner membrane contains many folds called cristae which contain specialized membrane proteins that enable the mitochondria to synthesize ATP. Mitochondria is the site of aerobic respiration.'",
+      "source_chunk_id": "bio9_ch04_c032"
+    }
+  },
   "grade_result": {
     "score": 5.5,
     "feedback": "Your answer correctly identified that the cell membrane is selectively permeable and mentioned it controls what enters the cell. However, you did not mention the phospholipid bilayer structure or the role of membrane proteins, which are key components described in the textbook passage. Partial credit awarded.",
     "missed_point": "The textbook passage states: 'The cell membrane is composed of a phospholipid bilayer with embedded protein molecules that assist in the transport of specific substances across the membrane.'",
-    "source_chunk_id": "bio9_ch04_c003"
+    "source_chunk_id": "bio9_ch04_c016"
   }
 }
