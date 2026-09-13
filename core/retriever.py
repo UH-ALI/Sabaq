@@ -56,7 +56,13 @@ def _get_index(index_path: str):
     if index_path not in _INDEX_CACHE:
         path = Path(index_path)
         if not path.exists():
-            raise FileNotFoundError(f"FAISS index not found at: {index_path}")
+            chunks_path = path.parent / "chunks.jsonl"
+            if chunks_path.exists():
+                from ingestion.build_index import build_index
+                chunks = _get_chunks(str(chunks_path))
+                build_index(chunks, str(path))
+            else:
+                raise FileNotFoundError(f"FAISS index not found at: {index_path}")
         _INDEX_CACHE[index_path] = faiss.read_index(str(path))
     return _INDEX_CACHE[index_path]
 

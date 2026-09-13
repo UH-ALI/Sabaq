@@ -18,8 +18,7 @@ venv/
 env/
 .env/
 
-# FAISS index (large binary, regenerate from source)
-data/bio9/index.faiss
+# FAISS index (tracked for zero-cold-start deployment)
 
 # Streamlit cache
 .streamlit/
